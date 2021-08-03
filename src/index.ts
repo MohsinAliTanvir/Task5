@@ -1,17 +1,20 @@
-import * as express from "express";
-import * as cors from "cors"
+import express from "express";
+import cors from "cors";
+import * as dotenv from 'dotenv';
 import Database from "./database";
 import Product from "./models/product";
-import { IncomingMessage, ServerResponse } from "http";
-const server = '127.0.0.1:27017'
-const database = 'Products'
+
+dotenv.config()
+
+const server = process.env.SERVER!
+const database = process.env.DATABASE!
 const app = express()
 
 app.use(cors()) // middleware for enabling CORS
 
 const dbInstance = new Database(server, database, Product);
 
-app.get('/products', (req: IncomingMessage, res: ServerResponse) => {
+app.get('/products', (req: express.Request, res: express.Response) => {
     const limit: number = 9
     let skip: number
 
@@ -21,18 +24,6 @@ app.get('/products', (req: IncomingMessage, res: ServerResponse) => {
     })
 })
 
-/*
-dbInstance.createRecord({
-    title: "",
-    ... rest of the person
-});
-*/
-
-
-//dbInstance.getRecord().then(console.log)
-
-
-
-// Checking env port number or else assigning 5000 instead
-const PORT = process.env.PORT || 5000
+// Checking env port number or else assigning 3000 instead
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

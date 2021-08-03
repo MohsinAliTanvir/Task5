@@ -1,7 +1,10 @@
 const path = require('path');
+const { nodeModuleNameResolver } = require('typescript');
 
 module.exports = {
+    target: 'node',
     entry: './src/index.ts',
+
     module: {
         rules: [
             {
@@ -12,7 +15,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: 'bundle.js',

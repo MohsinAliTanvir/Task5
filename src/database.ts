@@ -6,7 +6,6 @@ class Database<T> {
     private model: Model<T>;
 
     constructor(server: string, dbName: string, model: Model<T>) {
-        // mongoose.set({ useNewUrlParser, true })
         this.connection = connect(`mongodb://${server}/${dbName}`);
         this.model = model;
     }
@@ -46,7 +45,5 @@ class Database<T> {
             return false
         }
     }
-
 }
-
 export default Database;
